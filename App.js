@@ -19,6 +19,8 @@ import SignUpStudent from './screens/StudentScreens/SignUpStudent'
 import AddStudentOptions from './screens/TeacherScreens/AddStudentOptions'
 import AddStudentQR from './screens/TeacherScreens/AddStudentQR'
 import Role from './screens/MainScreens/RolesScreen'
+import JoinClass from './screens/StudentScreens/JoinClass'
+import CheckIn from './screens/StudentScreens/CheckIn'
 
 
 const Stack = createStackNavigator();
@@ -49,6 +51,8 @@ export default class App extends React.Component {
         <Stack.Screen name="SignUpStudent" component={SignUpStudent}/>
         <Stack.Screen name="AddStudentOptions" component={AddStudentOptions}/>
         <Stack.Screen name="AddStudentQR" component={AddStudentQR}/>
+        <Stack.Screen name="JoinClass" component={JoinClass}/>
+        <Stack.Screen name="CheckIn" component={CheckIn}/>
       </Stack.Navigator>
     </NavigationContainer>
   )

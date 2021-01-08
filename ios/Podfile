@@ -7,11 +7,13 @@ target 'RollCall2021' do
   config = use_native_modules!
 
   use_react_native!(:path => config["reactNativePath"])
-
+  
   target 'RollCall2021Tests' do
     inherit! :complete
     # Pods for testing
   end
+  permissions_path = '../node_modules/react-native-permissions/ios'
+  pod 'Permission-Camera', :path => "#{permissions_path}/Camera/Permission-Camera.podspec"
 
   # Enables Flipper.
   #
@@ -22,6 +24,7 @@ target 'RollCall2021' do
     flipper_post_install(installer)
   end
 end
+
 
 target 'RollCall2021-tvOS' do
   # Pods for RollCall2021-tvOS

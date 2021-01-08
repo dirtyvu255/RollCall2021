@@ -14,6 +14,7 @@ export default class RollCallChooseDay extends React.Component{
         idStudent: '',
         nameStudent: '',
         dayChecked: [],
+        qrDays: 0,
         valueQR: ''
     }
     componentDidMount() {
@@ -50,12 +51,17 @@ export default class RollCallChooseDay extends React.Component{
                     [{ text: "OK", onPress: () => this.toggleByHand() }]
                 )
             })
-        })
-            
+        })  
     }
     toggleQR() {
         const {userID, classID} = this.props.route.params
-        this.setState({isShowQR: !this.state.isShowQR, valueQR: userID + ':' + classID})
+        firestore()
+        .collection(`users/${userID}/lists`)
+        .doc(`${classID}`)
+        .onSnapshot(snap => {
+            this.setState({isShowQR: !this.state.isShowQR, valueQR: userID + ':' + classID + '/' + snap.data().days})
+        })  
+        
     }
     toggleByHand(){
         this.setState({isShowByHand: !this.state.isShowByHand, idStudent: '', nameStudent: ''})

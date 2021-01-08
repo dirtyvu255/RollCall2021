@@ -55,9 +55,6 @@ export default class Header extends React.Component{
 
 const styles = StyleSheet.create({  
     wrapper1:{
-      backgroundColor: '#67e2d9',
-      borderBottomLeftRadius: 18,
-      borderBottomRightRadius: 18,
       width: '100%',
       flexDirection: 'row',
       paddingTop: 45,
@@ -65,8 +62,8 @@ const styles = StyleSheet.create({
       justifyContent:'center'
     },
     title:{
-      fontSize: 30,
-      fontWeight: 'bold',
+      fontSize: 25,
+      fontWeight: '500',
       textTransform: 'uppercase',
       width: 240,
       textAlign: 'center'

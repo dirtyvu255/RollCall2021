@@ -3,49 +3,47 @@ import {View, StyleSheet, Text, Alert} from 'react-native'
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import Header from '../../components/Header'
 import firestore from '@react-native-firebase/firestore'
-export default class JoinClass extends React.Component{
+export default class CheckIn extends React.Component{
     constructor(props){
         super(props)
         this.state={
             userIDTeacher: '',
             classID: '',
-            days: 0
+            index: 0
         }
     }
-    joinInClass = async() => {
-        const {userIDTeacher, classID, days} = this.state
-        const {idStudent, nameStudent, userID} = this.props.route.params
-        let temp = []
-        for(let i = 0; i < days; i++){
-            temp.push(false)
-        }
+    checkIn = async() => {
+        const {userIDTeacher, classID, index} = this.state
+        const {userID} = this.props.route.params
+        const tempData = await firestore().collection(`users/${userIDTeacher}/lists/${classID}/students`)
+        .doc(userID)
+        .get()
+        let dayChecked = tempData.data().dayChecked
+        dayChecked[index] = true
         firestore().collection(`users/${userIDTeacher}/lists/${classID}/students`)
         .doc(userID)
-        .set({
-            idStudent: idStudent,
-            nameStudent: nameStudent,
-            dayChecked: temp,
+        .update({
+            dayChecked: dayChecked,
         }).then( () => {
             Alert.alert(
                 "Thông báo",
-                "Đã tham gia lớp học!!",
+                "Đã đi học !!!",
                 // [{ text: "OK", onPress: () => this.toggleByHand() }]
             )
         })
     }
     configData(data){
-        console.log(data)
         let temp = data.search(":");
         this.setState({userIDTeacher: data.substring(0,temp)})
         let temp3 = data.search("/");
         let temp4 = data.length;
         this.setState({classID: data.substring(temp + 1, temp3)})
-        this.setState({days: data.substring(temp3 + 1, temp4)})
+        this.setState({index: data.substring(temp3 + 1, temp4)})
     }
     onSuccess = async e => {
        if(e.data){
            await this.configData(e.data)
-           await this.joinInClass()
+           await this.checkIn()
        }
     };
 

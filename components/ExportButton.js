@@ -11,15 +11,7 @@ export default class Button extends React.Component{
         }
     }
     
-    checkDone(done){
-        if(done) {
-            return styles.containerDone
-        }
-        else {
-            return styles.containerUnDone
-        }
-    }
-    componentDidMount(){
+    configData = async() =>{
         const {info,students} = this.props
         let temp = []
         let tempTimeline = ["MSSV","Tên"]
@@ -47,24 +39,25 @@ export default class Button extends React.Component{
         this.setState({data: temp})
     }
 
-    createFile = () =>{
+    createFile = async() =>{
+        await this.configData()
         var wb = XLSX.utils.book_new()
         var ws = XLSX.utils.aoa_to_sheet(this.state.data);
         XLSX.utils.book_append_sheet(wb, ws, "SheetJS");
         const wbout = XLSX.write(wb, {type:'binary', bookType:"xlsx"});
-        const file = DDP + "baocao.xlsx";
+        const file = DDP + `baocao.xlsx`;
         writeFile(file, wbout, 'ascii').then((res) =>{
                 // Alert.alert("Xuất thành công", "Địa chỉ:" + file);
                 Alert.alert("Xuất thành công");
         }).catch((err) => { Alert.alert("exportFile Error", "Error " + err.message); });
     }
     render(){
-        const {info,done} = this.props
+        const {info} = this.props
         console.log(DDP + "baocao.xlsx")
         console.log(this.state.data)
         const day = new Date(info.dayStart.toDate())
         return(
-            <TouchableOpacity style={this.checkDone(done)} onPress={this.createFile} >
+            <TouchableOpacity style={styles.containerDone} onPress={this.createFile} >
                 <View style={{paddingVertical: 20}}>
                     <Text style={[styles.name, {marginBottom: 5}]}>{info.class}</Text>
                     <Text style={[styles.name, {marginBottom: 5}]}>{info.group}</Text>
@@ -82,16 +75,9 @@ const styles = StyleSheet.create({
         width: 300,
         marginTop: 25
     },
-    containerUnDone:{
-        backgroundColor: '#67e2d9',
-        borderRadius: 30,
-        width: 300,
-        marginTop: 25
-    },
     name: {
         fontWeight: 'bold',
         fontSize: 20,
-        // paddingVertical: 20,
         alignSelf: 'center',
         textAlign: 'center'
     }

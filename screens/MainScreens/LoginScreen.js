@@ -21,7 +21,7 @@ export default class Login extends React.Component {
         else if(displayName == 'Teacher')
           this.props.navigation.navigate('RollCallChooseClass',{userID: userID })
         else if(displayName == 'Student')
-          this.props.navigation.navigate('MenuStudent')
+          this.props.navigation.navigate('MenuStudent',{userID: userID })
       })
       .catch(error => this.setState({ errorMessage: 'Sai Email hoặc PassWord' }))
   }
