@@ -1,8 +1,10 @@
 import React from 'react'
-import {View, StyleSheet, Text, Alert} from 'react-native'
+import {View, Text, Alert} from 'react-native'
 import QRCodeScanner from 'react-native-qrcode-scanner';
-import Header from '../../components/Header'
 import firestore from '@react-native-firebase/firestore'
+import EStyleSheet from 'react-native-extended-stylesheet'
+import Header from '../../components/Header'
+
 export default class CheckIn extends React.Component{
     constructor(props){
         super(props)
@@ -14,23 +16,46 @@ export default class CheckIn extends React.Component{
     }
     checkIn = async() => {
         const {userIDTeacher, classID, index} = this.state
-        const {userID} = this.props.route.params
+        const {userID, idStudent} = this.props.route.params
+        const date = new Date()
+        const time = `${date.getHours()}:${date.getMinutes()} ${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`
         const tempData = await firestore().collection(`users/${userIDTeacher}/lists/${classID}/students`)
-        .doc(userID)
+        .doc(idStudent)
+        .get()
+        const classData = await firestore().collection(`users/${userIDTeacher}/lists`)
+        .doc(classID)
         .get()
         let dayChecked = tempData.data().dayChecked
         dayChecked[index] = true
-        firestore().collection(`users/${userIDTeacher}/lists/${classID}/students`)
-        .doc(userID)
-        .update({
-            dayChecked: dayChecked,
-        }).then( () => {
+        {classData.isAllowToScan ? (
+            firestore().collection(`users/${userIDTeacher}/lists/${classID}/students`)
+                .doc(idStudent)
+                .update({
+                    dayChecked: dayChecked,
+                })
+                .then( () => {
+                    firestore()
+                        .collection(`students/${userID}/history`)
+                        .add({
+                            class: classData.data().class,
+                            time: time
+                        })
+                })
+                .then( () => {
+                    Alert.alert(
+                        "Thông báo",
+                        "Đã đi học !!!",
+                        // [{ text: "OK", onPress: () => this.toggleByHand() }]
+                    )
+                })
+        ):(
             Alert.alert(
                 "Thông báo",
-                "Đã đi học !!!",
+                "Hết giờ điểm danh !!!",
                 // [{ text: "OK", onPress: () => this.toggleByHand() }]
             )
-        })
+        )}
+        
     }
     configData(data){
         let temp = data.search(":");
@@ -51,7 +76,7 @@ export default class CheckIn extends React.Component{
         return(
             <View>
                 <Header 
-                name='Điểm danh'
+                name='Đi học'
                 ></Header>
                 <Text style={styles.titleCamera}>Scan để đi học</Text>
                 <View style={styles.cameraContainer}>
@@ -66,22 +91,22 @@ export default class CheckIn extends React.Component{
     }
 }
 
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
     container: {
     },
     cameraContainer: {
-        marginLeft: 45,
+        marginLeft: '4.5rem',
         
     },
     cameraStyle:{
-        width: 320,
-        height: 320,
-        marginTop: 20
+        width: '32rem',
+        height: '32rem',
+        marginTop: '2rem'
     },
     titleCamera: {
         textAlign:'center',
         fontWeight: 'bold',
         fontSize: 20,
-        marginTop: 30,
+        marginTop: '3rem',
     }
 })

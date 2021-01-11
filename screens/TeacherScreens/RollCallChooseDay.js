@@ -1,6 +1,7 @@
 import React from 'react'
-import {View,StyleSheet, FlatList, TouchableOpacity, Text, TextInput, Alert} from 'react-native'
+import {View, FlatList, TouchableOpacity, Text, TextInput, Alert} from 'react-native'
 import firestore from '@react-native-firebase/firestore'
+import EStyleSheet from 'react-native-extended-stylesheet'
 import QRCode from 'react-native-qrcode-svg'
 import Modal from 'react-native-modal'
 import ButtonDay from '../../components/ButtonDay'
@@ -9,6 +10,8 @@ import Logo from '../../images/logo.png'
 export default class RollCallChooseDay extends React.Component{
     state = {
         listDay: [],
+        listDayChecked: [],
+        total: 0,
         isShowQR: false,
         isShowByHand: false,
         idStudent: '',
@@ -28,7 +31,27 @@ export default class RollCallChooseDay extends React.Component{
         .onSnapshot(snap => {
             this.setState({listDay: snap.data().timeline})
         })
+        firestore()
+        .collection(`users/${userID}/lists/${classID}/students`)
+        .onSnapshot(snapshot => {
+            let data = []
+            let data1 = []
+            snapshot.forEach( doc => {
+                data.push({...doc.data(), id: doc.id})
+            })
+            for(let i = 0; i < data[0].dayChecked.length; i++){
+                let count = 0
+                for(let j = 0; j < data.length; j++){
+                    if(data[j].dayChecked[i]){
+                        count += 1
+                    }
+                }
+                data1.push(count)
+            }
+            this.setState({listDayChecked: data1, total: data.length})
+        })
     }
+
 
     addStudent = async() => {
         const {userID, classID} = this.props.route.params
@@ -40,7 +63,9 @@ export default class RollCallChooseDay extends React.Component{
             for(let i = 0; i < snap.data().days; i++){
                 temp.push(false)
             }
-            firestore().collection(`users/${userID}/lists/${classID}/students`).add({
+            firestore().collection(`users/${userID}/lists/${classID}/students`)
+            .doc(this.state.idStudent)
+            .set({
                 idStudent: this.state.idStudent,
                 nameStudent: this.state.nameStudent,
                 dayChecked: temp,
@@ -78,6 +103,8 @@ export default class RollCallChooseDay extends React.Component{
                     renderItem={({ item, index }) => 
                     <ButtonDay
                         data={item}
+                        checkedCount={this.state.listDayChecked[index]}
+                        total= {this.state.total}
                         onPress={() => this.props.navigation.navigate('ListRollCall', {classID: classID, userID: userID, idDay:index})}
                     />}
                     keyExtractor={item => item.id}
@@ -128,7 +155,7 @@ export default class RollCallChooseDay extends React.Component{
     }
 }
 
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
     container: {
         backgroundColor: "#fff",
         flex: 1,
@@ -137,40 +164,40 @@ const styles = StyleSheet.create({
     qrContainer: {
         flex: 1,
         backgroundColor: '#fff',
-        marginHorizontal: -20,
-        marginTop: 380,
-        marginBottom: -80,
+        marginHorizontal: '-2rem',
+        marginTop: '38rem',
+        marginBottom: '-8rem',
         borderTopLeftRadius: 20,
         borderTopRightRadius: 20
     },
     confirmBlock: {
         backgroundColor: '#67e2d9',
-        height: 50,
+        height: '5rem',
         justifyContent: 'center',
         alignItems: 'center',
-        marginBottom: 20,
+        marginBottom: '2rem',
         borderRadius: 30,
         alignSelf: 'center',
-        marginTop: 20,
-        paddingHorizontal: 30
+        marginTop: '2rem',
+        paddingHorizontal: '3rem'
     },
     confirmText: {
         fontWeight: 'bold',
         fontSize: 20
     },
     inputBlock:{
-        marginTop: 15,
-        marginHorizontal: 5,
+        marginTop: '1.5rem',
+        marginHorizontal: '0.5rem',
     },
     infoInput: {
         fontSize: 18,
         fontWeight: '600',
     },
     textInput: {
-        height: 35,
+        height: '3.5rem',
         borderColor: 'black',
         borderWidth: 1,
         borderRadius: 10,
-        paddingLeft: 10
+        paddingLeft: '1rem'
     },
 })

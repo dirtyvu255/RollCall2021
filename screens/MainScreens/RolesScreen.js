@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {StyleSheet, View  } from 'react-native';
+import {View} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
 
@@ -16,7 +16,7 @@ export default class Roles extends Component {
             if(role == "Faculty"){
                 this.props.navigation.navigate('MenuFaculty',{userID: userID })
             }
-            else if(role == "Student"){
+            else if(!role){
                 this.props.navigation.navigate('MenuStudent',{userID: userID })
             }
             else if(role == "Teacher"){
@@ -31,30 +31,8 @@ export default class Roles extends Component {
     }
   render() {
     return (
-        <View  style={styles.container}>
+        <View>
         </View>
     );
   }
 };
-
-const styles = StyleSheet.create({
-    container: {
-        justifyContent: 'space-between',
-        flex: 1,
-        flexDirection: 'column',
-        backgroundColor: '#fff',
-        alignItems: 'center',
-    },
-    textContainer: {
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    text: {
-        fontSize: 25,
-        fontWeight: 'bold'
-    },
-    imageCustom: {
-        height: 265,
-        width: 265
-    }
-  })

@@ -1,5 +1,6 @@
 import React from 'react'
-import {Text, TouchableOpacity, StyleSheet, View, SafeAreaView, ScrollView, Image} from 'react-native'
+import {Text, TouchableOpacity, View, SafeAreaView, ScrollView, Image} from 'react-native'
+import EStyleSheet from 'react-native-extended-stylesheet'
 import AddStudent from '../../images/addStudent.png'
 import Check from '../../images/check.png'
 
@@ -33,7 +34,7 @@ render(){
     )
 }
 }
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
     mainContainer: {
         flex: 1,
         backgroundColor: '#fff',
@@ -48,18 +49,18 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     buttonStyle: {
-        height: 100,
+        height: '10rem',
         backgroundColor: '#67e2d9',
-        borderRadius: 50,
-        margin: 20,
-        marginHorizontal: 30,
+        borderRadius: '5rem',
+        margin: '2rem',
+        marginHorizontal: '3rem',
         alignItems: 'center',
         justifyContent: 'center',
         flexDirection: 'column'
     },
     iconStyle: {
-        height: 60,
-        width: 60
+        height: '6rem',
+        width: '6rem'
     },
     textButtonContainer: {
         alignItems: 'center',

@@ -1,6 +1,7 @@
 import React from 'react'
-import {Text, TouchableOpacity, StyleSheet, View, ScrollView, Image, TextInput, Alert} from 'react-native'
+import {Text, TouchableOpacity, View, ScrollView, Image, TextInput, Alert} from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import EStyleSheet from 'react-native-extended-stylesheet'
 import Modal from 'react-native-modal'
 import firestore from '@react-native-firebase/firestore'
 import AddStudent from '../../images/addStudent.png'
@@ -35,22 +36,24 @@ export default class MenuStudent extends React.Component{
         .doc(`${userID}`)
         .onSnapshot(snap => {
             let data = snap.data()
-            this.setState({idStudent: data.idStudent, nameStudent: data.nameStudent})
-            })
+            if(data)
+                this.setState({idStudent: data.idStudent, nameStudent: data.nameStudent}) 
+        })
     }
+
     updateInfo = async() => {
         const {userID} = this.props.route.params
         await firestore()
           .collection('students')
           .doc(`${userID}`)
-          .update({
+          .set({
             idStudent: this.state.idStudent,
             nameStudent: this.state.nameStudent
           })
           .then( () => {
             Alert.alert(
                 "Thông báo",
-                "Điểm danh thành công!",
+                "Cập nhật thành công!",
                 [{ text: "OK", onPress: () => this.toggleInfo() }]
               )
           })
@@ -59,12 +62,17 @@ export default class MenuStudent extends React.Component{
         this.getData()
         this.setState({isVisible: !this.state.isVisible})
     }
+    configName(){
+        let name = this.state.nameStudent
+        let firstName = name.split(' ').slice(-1)
+         return firstName
+    }
 render(){
     const {userID} = this.props.route.params
     return(
         <View style={styles.mainContainer}>
             <Header 
-                name={`Hi Chau`}
+                name={`Hi ${this.configName()}!`}
                 buttonExit={() => this.logOut()} 
                 iconExit='Exit'
                 button={() => this.toggleInfo()} 
@@ -82,7 +90,7 @@ render(){
                 </TouchableOpacity>
                 <TouchableOpacity 
                     style={styles.buttonStyle}
-                    onPress= {() => this.props.navigation.navigate('CheckIn', {userID: userID})}
+                    onPress= {() => this.props.navigation.navigate('CheckIn', {userID: userID,idStudent: this.state.idStudent})}
                 >
                     <Image source={AddStudent} style={styles.iconStyle}/>
                     <View style={styles.textButtonContainer}>
@@ -125,24 +133,24 @@ render(){
     )
 }
 }
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
     mainContainer: {
         flex: 1,
         backgroundColor: '#fff',
     },
     buttonStyle: {
-        height: 100,
+        height: '10rem',
         backgroundColor: '#67e2d9',
         borderRadius: 50,
-        margin: 20,
-        marginHorizontal: 30,
+        margin: '2rem',
+        marginHorizontal: '3rem',
         alignItems: 'center',
         justifyContent: 'center',
         flexDirection: 'column'
     },
     iconStyle: {
-        height: 60,
-        width: 60
+        height: '6rem',
+        width: '6rem'
     },
     textButtonContainer: {
         alignItems: 'center',
@@ -154,32 +162,32 @@ const styles = StyleSheet.create({
     },
     confirmBlock: {
         backgroundColor: '#67e2d9',
-        height: 50,
+        height: '5rem',
         justifyContent: 'center',
         alignItems: 'center',
-        marginBottom: 20,
+        marginBottom: '2rem',
         borderRadius: 30,
         alignSelf: 'center',
-        marginTop: 20,
-        paddingHorizontal: 30
+        marginTop: '2rem',
+        paddingHorizontal: '3rem'
     },
     confirmText: {
         fontWeight: 'bold',
         fontSize: 20
     },
     inputBlock:{
-        marginTop: 15,
-        marginHorizontal: 5,
+        marginTop: '1.5rem',
+        marginHorizontal: '0.5rem',
     },
     infoInput: {
         fontSize: 18,
         fontWeight: '600',
     },
     textInput: {
-        height: 35,
+        height: '3.5rem',
         borderColor: 'black',
         borderWidth: 1,
         borderRadius: 10,
-        paddingLeft: 10
+        paddingLeft: '1rem'
     },
 })

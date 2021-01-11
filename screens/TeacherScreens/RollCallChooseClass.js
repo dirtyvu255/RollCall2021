@@ -1,6 +1,7 @@
 import React from 'react'
-import {View,StyleSheet, FlatList, Text, Alert} from 'react-native'
+import {View, FlatList, Text, Alert} from 'react-native'
 import firestore from '@react-native-firebase/firestore';
+import EStyleSheet from 'react-native-extended-stylesheet'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import XLSX from 'xlsx'
 import { writeFile, DocumentDirectoryPath } from 'react-native-fs'
@@ -59,9 +60,6 @@ export default class RollCallChooseClass extends React.Component{
             console.log(e)
           }
     }
-    configData = async(item) =>{
-        
-    }
 
     createFile = async(item) =>{
         const userID = this.props.route.params.userID
@@ -104,7 +102,6 @@ export default class RollCallChooseClass extends React.Component{
         }) 
     }
     render(){
-        console.log(DDP + "baocao.xlsx")
         const userID = this.props.route.params.userID
         return(
             <View style={styles.container}>
@@ -143,7 +140,7 @@ export default class RollCallChooseClass extends React.Component{
                         item={item}
                         done={item.done}
                         onPress={() => this.props.navigation.navigate("RollCallChooseDay", {classID: item.id, userID: userID, name: item.class})}
-                        onLongPress= {() => this.createFile(item)}
+                        onLongPress= {() => this.createFile(item)}  
                     />}
                     keyExtractor={item => item.id}
                 />
@@ -167,7 +164,7 @@ export default class RollCallChooseClass extends React.Component{
     }
 }
 
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
     container: {
         flex: 1,
         flexDirection: 'column',

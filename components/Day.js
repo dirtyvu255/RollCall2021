@@ -1,6 +1,7 @@
 import React from 'react'
-import {View, Text, StyleSheet, Image} from 'react-native'
+import {View, Text, Image} from 'react-native'
 import CheckBox from "@react-native-community/checkbox"
+import EStyleSheet from 'react-native-extended-stylesheet'
 
 export default class Day extends React.Component{
     constructor(props){
@@ -24,16 +25,16 @@ export default class Day extends React.Component{
     }
 }
 
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
     calendarBlock: {
         flexDirection: 'column',
-        margin: 2,
+        margin: '0.1rem',
         justifyContent: 'center',
         alignItems: 'center'
     },
     calendar: {
-        height:45,
-        width: 45,
-        marginLeft: 6
+        height:'4.5rem',
+        width: '4.5rem',
+        marginLeft: '0.7rem'
     },
 })

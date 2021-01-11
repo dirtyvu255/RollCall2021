@@ -1,5 +1,6 @@
 import React from 'react'
-import {View, Text, StyleSheet, Image} from 'react-native'
+import {View, Text, Image} from 'react-native'
+import EStyleSheet from 'react-native-extended-stylesheet'
 import CheckBox from "@react-native-community/checkbox"
 
 export default class Role extends React.Component{
@@ -25,15 +26,15 @@ export default class Role extends React.Component{
     }
 }
 
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
     calendarBlock: {
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        marginRight: 65
+        marginRight: '6.5rem'
     },
     icon: {
-        height: 55,
-        width: 55
+        height: '5.5rem',
+        width: '5.5rem'
     },
 })

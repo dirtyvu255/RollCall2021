@@ -1,6 +1,7 @@
 import React from 'react'
-import { StyleSheet, Text, TextInput, View, TouchableOpacity, SafeAreaView, ScrollView, Image, FlatList, Alert} from 'react-native'
-import auth from '@react-native-firebase/auth';
+import {Text, TextInput, View, TouchableOpacity, SafeAreaView, ScrollView, Image, FlatList, Alert} from 'react-native'
+import auth from '@react-native-firebase/auth'
+import EStyleSheet from 'react-native-extended-stylesheet'
 import Role from '../../components/Role'
 import Logo from '../../images/logo.png'
 import Student from '../../images/student.png'
@@ -30,7 +31,6 @@ export default class SignUp extends React.Component {
       },
     ]
   }
-
 handleSignUp = () => {
   auth()
   .createUserWithEmailAndPassword(this.state.email, this.state.password)
@@ -126,34 +126,34 @@ render() {
     )
   }
 }
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
   mainContainer: {
     flex: 1,
     backgroundColor: '#FFF',
     justifyContent: 'center',
   },
   container: {
-    marginHorizontal: 50,
+    marginHorizontal: '5rem',
   },
   logoBLock: {
-    height: 220,
-    width: 280,
+    height: '22rem',
+    width: '28rem',
   },
   textInputTitle: {
     fontWeight: '600',
     fontSize: 15,
-    marginVertical: 5,
-    marginTop: 10
+    marginVertical: '0.5rem',
+    marginTop: '1rem'
   },
   textInput: {
-    height: 45,
+    height: '4.5rem',
     borderColor: 'gray',
     borderWidth: 1,
     borderRadius: 15,
-    paddingLeft: 10,
+    paddingLeft: '1rem',
   },
   listCalendar: {
-    marginTop: 25,
+    marginTop: '2.5rem',
     flexDirection: 'row',
     justifyContent: 'space-between',
     //marginLeft: 20
@@ -164,12 +164,12 @@ const styles = StyleSheet.create({
   },
   confirmBlock: {
     backgroundColor: '#67e2d9',
-    height: 50,
-    width: 180,
+    height: '5rem',
+    width: '18rem',
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 50,
-      borderRadius: 100
+    marginBottom: '5rem',
+    borderRadius: 100
   },
   confirmText: {
     fontWeight: 'bold',

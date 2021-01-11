@@ -19,7 +19,7 @@
 		2DCD954D1E0B4F2C00145EB5 /* RollCall2021Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* RollCall2021Tests.m */; };
 		77E89E9AE819E19496B90114 /* libPods-RollCall2021-RollCall2021Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 89B0ECB02FBAB18040A69D04 /* libPods-RollCall2021-RollCall2021Tests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		9163C1BA25A47F0B002CA784 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9163C1B925A47F0B002CA784 /* GoogleService-Info.plist */; };
+		9115238725AAC954008D37E5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9115238625AAC954008D37E5 /* GoogleService-Info.plist */; };
 		B5C712C50E9A4D2F09242C54 /* libPods-RollCall2021-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B82B2367E0CB673861DD7494 /* libPods-RollCall2021-tvOS.a */; };
 /* End PBXBuildFile section */
 
@@ -60,7 +60,7 @@
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = RollCall2021/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8908AC9EAD0C0A1F587193B7 /* Pods-RollCall2021-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RollCall2021-tvOS.release.xcconfig"; path = "Target Support Files/Pods-RollCall2021-tvOS/Pods-RollCall2021-tvOS.release.xcconfig"; sourceTree = "<group>"; };
 		89B0ECB02FBAB18040A69D04 /* libPods-RollCall2021-RollCall2021Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RollCall2021-RollCall2021Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		9163C1B925A47F0B002CA784 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		9115238625AAC954008D37E5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A014F3F02A16AEF188C75B9C /* Pods-RollCall2021-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RollCall2021-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-RollCall2021-tvOSTests/Pods-RollCall2021-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		B82B2367E0CB673861DD7494 /* libPods-RollCall2021-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RollCall2021-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2BB80BEB51606DCF36F667F /* libPods-RollCall2021-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RollCall2021-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -176,7 +176,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				9163C1B925A47F0B002CA784 /* GoogleService-Info.plist */,
+				9115238625AAC954008D37E5 /* GoogleService-Info.plist */,
 				13B07FAE1A68108700A75B9A /* RollCall2021 */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* RollCall2021Tests */,
@@ -347,7 +347,7 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
-				9163C1BA25A47F0B002CA784 /* GoogleService-Info.plist in Resources */,
+				9115238725AAC954008D37E5 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

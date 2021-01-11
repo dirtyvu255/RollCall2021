@@ -1,6 +1,7 @@
 import React from 'react'
-import {View, Text, TextInput, StyleSheet, FlatList, TouchableOpacity, Alert} from 'react-native'
+import {View, Text, TextInput, FlatList, TouchableOpacity, Alert} from 'react-native'
 import Day from '../../components/Day'
+import EStyleSheet from 'react-native-extended-stylesheet'
 import firestore from '@react-native-firebase/firestore'
 import DateTimePicker from '@react-native-community/datetimepicker'
 import Modal from 'react-native-modal'
@@ -161,7 +162,7 @@ export default class FixList extends React.Component{
         return(
             <Modal isVisible={this.props.isShowEdit} style={{width: '100%', marginLeft: -1, marginTop: 250}} onBackdropPress={()=>this.props.toggleFixList()}>
             <View style={styles.container}>
-                <Text style={{fontSize: 35, fontWeight: 'bold', textAlign:'center', marginTop: 25}}>EDIT CLASS</Text>
+                <Text style={{fontSize: 30, fontWeight: 'bold', textAlign:'center', marginTop: 25}}>THAY ĐỔI THÔNG TIN</Text>
                 <View style={styles.inputBlock}>
                     <Text style={styles.textInput}>Tên môn</Text>
                     <TextInput 
@@ -253,7 +254,7 @@ export default class FixList extends React.Component{
         )
     }
 }
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
     container:{
         flexDirection: 'column',
         backgroundColor: '#fff',
@@ -261,31 +262,31 @@ const styles = StyleSheet.create({
         borderTopRightRadius: 20
     },
     inputBlock:{
-        marginTop: 15,
-        marginHorizontal: 5,
+        marginTop: '1.5rem',
+        marginHorizontal: '0.5rem',
     },
     textInput: {
         fontSize: 18,
         fontWeight: '600',
     },
     placeHolder: {
-        height: 35,
+        height: '3.5rem',
         borderColor: 'black',
         borderWidth: 1,
         borderRadius: 10,
-        paddingLeft: 10
+        paddingLeft: '1rem'
     },
     listCalendar: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        marginLeft: 8
+        marginLeft: '1rem'
     },
     calendarBlock: {
         flexDirection: 'column'
     },
     calendar: {
-        height: 50,
-        width: 50
+        height: '5rem',
+        width: '5rem'
     },
     time:{
         flexDirection: 'row',
@@ -293,25 +294,25 @@ const styles = StyleSheet.create({
     },
     confirmBlock: {
         backgroundColor: '#67e2d9',
-        height: 50,
-        width: 180,
+        height: '5rem',
+        width: '18rem',
         justifyContent: 'center',
         alignItems: 'center',
-        marginBottom: 50,
+        marginBottom: '5rem',
         borderRadius: 30
     },
     confirmDeleteBlock: {
         backgroundColor: 'red',
-        height: 50,
-        width: 180,
+        height: '5rem',
+        width: '18rem',
         justifyContent: 'center',
         alignItems: 'center',
-        marginBottom: 50,
+        marginBottom: '5rem',
         borderRadius: 30
     },
     confirmText: {
         fontWeight: 'bold',
         fontSize: 20
-    }
+    } 
     
 })

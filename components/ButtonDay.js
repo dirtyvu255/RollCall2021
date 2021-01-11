@@ -1,5 +1,6 @@
 import React from 'react'
-import {Text, TouchableOpacity, StyleSheet} from 'react-native'
+import {Text, TouchableOpacity} from 'react-native'
+import EStyleSheet from 'react-native-extended-stylesheet'
 
 export default class Button extends React.Component{
     constructor(props){
@@ -22,28 +23,31 @@ export default class Button extends React.Component{
             return "Thứ Bảy"
     }
     render(){
-        const {data, onPress} = this.props
+        const {data, onPress, total, checkedCount} = this.props
         const day = new Date(data.toDate())
         return(
             <TouchableOpacity style={styles.container} onPress={onPress}>
-                <Text style={[styles.name,{paddingBottom: -20}]}>{this.dayOfWeek(day.getDay())}</Text>
-                <Text style={styles.name}>{day.getDate()}/{day.getMonth() + 1}/{day.getFullYear()}</Text>
+                <Text style={[styles.name, {paddingTop: 20}]}>{this.dayOfWeek(day.getDay())}: {day.getDate()}/{day.getMonth() + 1}/{day.getFullYear()}</Text>
+                <Text style={[styles.name, {paddingBottom: 20}]}>Đi học: {checkedCount}/{total}</Text>
             </TouchableOpacity>
         )
     }
 }
 
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
     container:{
         backgroundColor: '#67e2d9',
         borderRadius: 30,
-        width: 300,
-        marginTop: 25
+        marginTop: '2.5rem',
+        paddingHorizontal: '4rem',
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginBottom: '0.5rem'
     },
     name: {
-        fontWeight: 'bold',
+        fontWeight: '600',
         fontSize: 20,
-        paddingVertical: 20,
+        paddingBottom: '1rem',
         alignSelf: 'center',
         textAlign: 'center'
     }

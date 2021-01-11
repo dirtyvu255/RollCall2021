@@ -1,6 +1,7 @@
 import React from 'react'
-import {View, Text, StyleSheet} from 'react-native'
+import {View, Text} from 'react-native'
 import CheckBox from "@react-native-community/checkbox"
+import EStyleSheet from 'react-native-extended-stylesheet'
 
 export default class Student extends React.Component{
     render(){
@@ -9,7 +10,7 @@ export default class Student extends React.Component{
         return(
             <View style={styles.container}>
                 <View style={{flex:1, flexDirection: 'row'}}>
-                    <Text style={styles.id}>{item.idStudent}</Text>
+                    <Text style={styles.id} numberOfLines={1}>{item.idStudent}</Text>
                     <Text style={styles.name}>{item.nameStudent}</Text>
                 </View>
                 <CheckBox
@@ -24,14 +25,14 @@ export default class Student extends React.Component{
     }
 }
 
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
     container:{
         backgroundColor: '#fff',
         flexDirection: 'row',
-        borderBottomWidth: 0.5,
-        paddingTop: 10,
-        paddingBottom: 5,
-        marginHorizontal: 15,
+        borderBottomWidth: 0.4,
+        paddingTop: '1rem',
+        paddingBottom: '0.5rem',
+        marginHorizontal: '1.5rem',
         justifyContent: 'space-between'
     },
     name: {

@@ -1,5 +1,6 @@
 import React from 'react'
-import {Text, View, StyleSheet, Image,TouchableOpacity } from 'react-native';
+import {Text, View, Image,TouchableOpacity } from 'react-native'
+import EStyleSheet from 'react-native-extended-stylesheet'
 import iconAdd from '../images/add.png'
 import Exit from '../images/exit.png'
 import QR from '../images/qr.png'
@@ -53,33 +54,33 @@ export default class Header extends React.Component{
   }
 }
 
-const styles = StyleSheet.create({  
+const styles = EStyleSheet.create({  
     wrapper1:{
       width: '100%',
       flexDirection: 'row',
-      paddingTop: 45,
-      paddingBottom: 15,
+      paddingTop: '5rem',
+      paddingBottom: '1.5rem',
       justifyContent:'center'
     },
     title:{
       fontSize: 25,
       fontWeight: '500',
-      textTransform: 'uppercase',
-      width: 240,
+      // textTransform: 'uppercase',
+      width: '24rem',
       textAlign: 'center'
     },
     icon: {
-      height: 25,
-      width: 25,
+      height: '2.5rem',
+      width: '2.5rem',
       position: 'absolute',
-      marginTop: 5,
-      left: 40
+      marginTop: '0.3rem',
+      left: '4rem'
     },
     iconExit: {
-      height: 25,
-      width: 25,
+      height: '2.5rem',
+      width: '2.5rem',
       position: 'absolute',
-      marginTop: 5,
-      right: 40
+      marginTop: '0,3rem',
+      right: '4rem'
     }
   });

@@ -1,6 +1,7 @@
 import React from 'react'
-import {View, StyleSheet, Text, Alert} from 'react-native'
+import {View, Text, Alert} from 'react-native'
 import QRCodeScanner from 'react-native-qrcode-scanner';
+import EStyleSheet from 'react-native-extended-stylesheet'
 import Header from '../../components/Header'
 import firestore from '@react-native-firebase/firestore'
 export default class JoinClass extends React.Component{
@@ -20,7 +21,7 @@ export default class JoinClass extends React.Component{
             temp.push(false)
         }
         firestore().collection(`users/${userIDTeacher}/lists/${classID}/students`)
-        .doc(userID)
+        .doc(idStudent)
         .set({
             idStudent: idStudent,
             nameStudent: nameStudent,
@@ -53,9 +54,9 @@ export default class JoinClass extends React.Component{
         return(
             <View>
                 <Header 
-                name='Điểm danh'
+                name='Vào lớp'
                 ></Header>
-                <Text style={styles.titleCamera}>Scan để đi học</Text>
+                <Text style={styles.titleCamera}>Scan để vào lớp</Text>
                 <View style={styles.cameraContainer}>
                     <QRCodeScanner 
                         showMarker={true}
@@ -68,22 +69,20 @@ export default class JoinClass extends React.Component{
     }
 }
 
-const styles = StyleSheet.create({
-    container: {
-    },
+const styles = EStyleSheet.create({
     cameraContainer: {
-        marginLeft: 45,
+        marginLeft: '4.5rem',
         
     },
     cameraStyle:{
-        width: 320,
-        height: 320,
-        marginTop: 20
+        width: '32rem',
+        height: '32rem',
+        marginTop: '2rem'
     },
     titleCamera: {
         textAlign:'center',
         fontWeight: 'bold',
         fontSize: 20,
-        marginTop: 30,
+        marginTop: '3rem',
     }
 })

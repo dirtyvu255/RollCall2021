@@ -1,7 +1,8 @@
 import React from 'react'
-import {View, Text, StyleSheet, FlatList, TouchableOpacity, Alert} from 'react-native'
+import {View, Text, FlatList, TouchableOpacity, Alert} from 'react-native'
 import firestore from '@react-native-firebase/firestore'
 import QRCode from 'react-native-qrcode-svg'
+import EStyleSheet from 'react-native-extended-stylesheet'
 import Modal from 'react-native-modal'
 import Student from '../../components/Students'
 import Header from '../../components/Header'
@@ -39,17 +40,21 @@ export default class ListRollCall extends React.Component{
           .update({
             dayChecked: ele.dayChecked
           })
-          .then( () => {
-            Alert.alert(
-                "Thông báo",
-                "Điểm danh thành công!",
-                // [{ text: "OK", onPress: () => this.props.navigation.navigate("MenuTeacher") }]
-              )
-          })
         )
+        Alert.alert(
+            "Thông báo",
+            "Điểm danh thành công!",
+            // [{ text: "OK", onPress: () => this.props.navigation.navigate("MenuTeacher") }]
+          )
     }
     toggleQR() {
         const {idDay,userID,classID} = this.props.route.params
+            firestore()
+              .collection(`users/${userID}/lists`)
+              .doc(`${classID}`)
+              .update({
+                isAllowToScan: !this.state.isShowQR
+              })
         this.setState({isShowQR: !this.state.isShowQR, valueQR: userID + ':' + classID + '/' + idDay})
     }
     render(){
@@ -101,7 +106,7 @@ export default class ListRollCall extends React.Component{
     }
 }
 
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
     container:{
         backgroundColor: '#fff',
         borderRadius: 15,
@@ -111,9 +116,9 @@ const styles = StyleSheet.create({
         borderBottomWidth: 0.5,
         flexDirection: 'row',
         justifyContent: 'space-between',
-        marginTop: 20,
-        marginBottom: -20,
-        marginHorizontal: 15
+        marginTop: '2rem',
+        marginBottom: '-2rem',
+        marginHorizontal: '1.5rem'
     },
     tagItem: {
         fontSize: 16,
@@ -123,22 +128,22 @@ const styles = StyleSheet.create({
         backgroundColor: '#67e2d9',
         justifyContent: 'center',
         alignItems: 'center',
-        marginBottom: 50,
+        marginBottom: '5rem',
         borderRadius: 30,
-        marginHorizontal: 60
+        marginHorizontal: '6rem'
     },
     confirmText: {
         fontWeight: 'bold',
         fontSize: 20,
-        padding: 15,
-        paddingHorizontal: 100
+        padding: '1.5rem',
+        paddingHorizontal: '10rem'
     },
     qrContainer: {
         flex: 1,
         backgroundColor: '#fff',
-        marginHorizontal: -20,
-        marginTop: 420,
-        marginBottom: -50,
+        marginHorizontal: '-2rem',
+        marginTop: '42rem',
+        marginBottom: '-5rem',
         borderTopLeftRadius: 20,
         borderTopRightRadius: 20
     }
