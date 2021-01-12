@@ -132,6 +132,7 @@ export default class CreateList extends React.Component{
             dayOfWeek: this.state.dayOfWeek,
             timeline: this.state.timeline,
             timeStart: this.state.timeStart,
+            isAllowToScan: false,
             timeEnd: this.state.timeEnd,
             done: false,
         })

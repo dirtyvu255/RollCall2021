@@ -1,15 +1,30 @@
 import React from 'react'
-import {Text, TouchableOpacity, View, SafeAreaView, ScrollView, Image} from 'react-native'
+import {Text, TouchableOpacity, View, ScrollView, Image} from 'react-native'
 import EStyleSheet from 'react-native-extended-stylesheet'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import AddStudent from '../../images/addStudent.png'
 import Check from '../../images/check.png'
+import Header from '../../components/Header'
 
 
 export default class MenuFaculty extends React.Component{
-
+    logOut = async() =>{
+        try{
+            await AsyncStorage.removeItem('userID')
+            await AsyncStorage.removeItem('role')
+            await this.props.navigation.navigate('Login')
+          } catch (e){
+            console.log(e)
+          }
+    }
 render(){
     return(
-        <SafeAreaView style={styles.mainContainer}>
+        <View style={styles.mainContainer}>
+            <Header 
+                name='Menu' 
+                buttonExit={() => this.logOut()} 
+                iconExit='Exit'
+            ></Header>
             <ScrollView>
                 <TouchableOpacity 
                     style={styles.buttonStyle}
@@ -30,7 +45,7 @@ render(){
                 </TouchableOpacity>
                 
             </ScrollView>
-        </SafeAreaView>
+        </View>
     )
 }
 }

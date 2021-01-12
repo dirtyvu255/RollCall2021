@@ -22,6 +22,7 @@ export default class ListRollCall extends React.Component{
         const {userID, classID} = this.props.route.params
         firestore()
         .collection(`users/${userID}/lists/${classID}/students`)
+        .orderBy('alphabet')
         .onSnapshot(snapshot => {
             let data = []
             snapshot.forEach( doc => {
@@ -61,7 +62,12 @@ export default class ListRollCall extends React.Component{
         const {idDay} = this.props.route.params
         return(
         <View style={styles.container}>     
-            <Header name='Danh sách' button={() => this.toggleQR()} icon='QR'></Header>
+            <Header name='Danh sách' 
+            button={() => this.toggleQR()} 
+            icon='QR'
+            buttonBack={() => this.props.navigation.goBack()} 
+            iconBack='Back'
+            ></Header>
             <View style={styles.tag}>
                 <Text style={styles.tagItem}>ID</Text>
                 <Text style={[styles.tagItem, {marginLeft: -85}]}>Họ và Tên</Text>

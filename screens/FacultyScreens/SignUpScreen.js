@@ -1,5 +1,5 @@
 import React from 'react'
-import {Text, TextInput, View, TouchableOpacity, SafeAreaView, ScrollView, Image, FlatList, Alert} from 'react-native'
+import {Text, TextInput, View, TouchableOpacity, ScrollView, Image, FlatList, Alert} from 'react-native'
 import auth from '@react-native-firebase/auth'
 import EStyleSheet from 'react-native-extended-stylesheet'
 import Role from '../../components/Role'
@@ -7,6 +7,7 @@ import Logo from '../../images/logo.png'
 import Student from '../../images/student.png'
 import Teacher from '../../images/teacher.png'
 import Faculty from '../../images/faculty.png'
+import Header from '../../components/Header'
 export default class SignUp extends React.Component {
   state = { 
     email: '', password: '', errorMessage: null, role: '', confirmPassword: '',
@@ -62,7 +63,11 @@ setRole() {
 render() {
   console.log(this.state.role)
     return (
-      <SafeAreaView style={styles.mainContainer}>
+      <View style={styles.mainContainer}>
+        <Header 
+        buttonBack={() => this.props.navigation.goBack()} 
+        iconBack='Back'
+        ></Header>
         <ScrollView>
         <View style={{alignItems: 'center', marginTop: 30}}>
           <Image source={Logo} style={styles.logoBLock}/>
@@ -122,7 +127,7 @@ render() {
           </View>
         </View>
         </ScrollView>
-        </SafeAreaView>
+        </View>
     )
   }
 }

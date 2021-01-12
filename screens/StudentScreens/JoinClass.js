@@ -25,6 +25,7 @@ export default class JoinClass extends React.Component{
         .set({
             idStudent: idStudent,
             nameStudent: nameStudent,
+            alphabet: nameStudent.split(' ').slice(-1)[0],
             dayChecked: temp,
         }).then( () => {
             Alert.alert(
@@ -55,6 +56,8 @@ export default class JoinClass extends React.Component{
             <View>
                 <Header 
                 name='Vào lớp'
+                buttonBack={() => this.props.navigation.goBack()} 
+                iconBack='Back'
                 ></Header>
                 <Text style={styles.titleCamera}>Scan để vào lớp</Text>
                 <View style={styles.cameraContainer}>

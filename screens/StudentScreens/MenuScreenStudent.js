@@ -14,6 +14,7 @@ export default class MenuStudent extends React.Component{
         this.state={
             idStudent: '',
             nameStudent: '',
+            noti: false,
             isVisible: false
         }
     }
@@ -37,7 +38,9 @@ export default class MenuStudent extends React.Component{
         .onSnapshot(snap => {
             let data = snap.data()
             if(data)
-                this.setState({idStudent: data.idStudent, nameStudent: data.nameStudent}) 
+                this.setState({idStudent: data.idStudent, nameStudent: data.nameStudent, noti: false}) 
+            else
+                this.setState({noti: true})
         })
     }
 
@@ -76,7 +79,8 @@ render(){
                 buttonExit={() => this.logOut()} 
                 iconExit='Exit'
                 button={() => this.toggleInfo()} 
-                icon='AddList' 
+                icon='User'
+                noti={this.state.noti}
                 ></Header>
             <ScrollView>
                 <TouchableOpacity 
@@ -99,10 +103,11 @@ render(){
                 </TouchableOpacity>
                 <TouchableOpacity 
                     style={styles.buttonStyle}
+                    onPress= {() => this.props.navigation.navigate('History', {userID: userID})}
                 >
                     <Image source={Check} style={styles.iconStyle}/>
                     <View style={styles.textButtonContainer}>
-                        <Text style={styles.textButton}>Xem danh sách</Text>
+                        <Text style={styles.textButton}>Xem lịch sử</Text>
                     </View>
                 </TouchableOpacity>
             </ScrollView>

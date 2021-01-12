@@ -16,7 +16,7 @@ export default class Roles extends Component {
             if(role == "Faculty"){
                 this.props.navigation.navigate('MenuFaculty',{userID: userID })
             }
-            else if(!role){
+            else if(!role && userID){
                 this.props.navigation.navigate('MenuStudent',{userID: userID })
             }
             else if(role == "Teacher"){

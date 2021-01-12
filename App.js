@@ -14,6 +14,7 @@ import ListRollCall from './screens/TeacherScreens/ListRollCall'
 import Role from './screens/MainScreens/RolesScreen'
 import JoinClass from './screens/StudentScreens/JoinClass'
 import CheckIn from './screens/StudentScreens/CheckIn'
+import History from './screens/StudentScreens/History'
 
 const Stack = createStackNavigator();
 export default class App extends React.Component {
@@ -26,6 +27,7 @@ export default class App extends React.Component {
         ></StatusBar>
       <Stack.Navigator
       screenOptions={{
+        gestureEnabled:false,
         headerShown: false
       }}
       >
@@ -39,6 +41,7 @@ export default class App extends React.Component {
         <Stack.Screen name="MenuStudent" component={MenuStudent}/>
         <Stack.Screen name="JoinClass" component={JoinClass}/>
         <Stack.Screen name="CheckIn" component={CheckIn}/>
+        <Stack.Screen name="History" component={History}/>
       </Stack.Navigator>
     </NavigationContainer>
   )

@@ -77,6 +77,8 @@ export default class CheckIn extends React.Component{
             <View>
                 <Header 
                 name='Đi học'
+                buttonBack={() => this.props.navigation.goBack()} 
+                iconBack='Back'
                 ></Header>
                 <Text style={styles.titleCamera}>Scan để đi học</Text>
                 <View style={styles.cameraContainer}>

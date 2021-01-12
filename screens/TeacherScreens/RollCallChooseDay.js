@@ -68,6 +68,7 @@ export default class RollCallChooseDay extends React.Component{
             .set({
                 idStudent: this.state.idStudent,
                 nameStudent: this.state.nameStudent,
+                alphabet: this.state.nameStudent.split(' ').slice(-1)[0],
                 dayChecked: temp,
             }).then( () => {
                 Alert.alert(
@@ -96,7 +97,13 @@ export default class RollCallChooseDay extends React.Component{
         const {userID, classID, name} = this.props.route.params
         return(
             <View style={styles.container}>
-                <Header name={`${name}`} button={() => this.toggleQR()} icon='AddStudent'></Header>
+                <Header 
+                name={`${name}`} 
+                button={() => this.toggleQR()} 
+                icon='AddStudent'
+                buttonBack={() => this.props.navigation.goBack()} 
+                iconBack='Back'
+                ></Header>
                 <FlatList    
                     showsVerticalScrollIndicator={false}
                     data={this.state.listDay}
